@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+</head>
+    <body>
+        <div class="container">
+            <h2>TODO LIST</h2>
+            <div class="input-group">
+                <input type="text" id="text-input-field">
+                <button id="add-button">
+                    Add
+                </button>
+            </div>
+           
+            <div class="todos-container">
+
+            </div>
+
+        </div>
+
+        <script>
+
+            const textInputFiled=document.querySelector('#text-input-field');
+            const addButton=document.querySelector('#add-button');
+            const todosContainer=document.querySelector('.todos-container');
+
+            addButton.addEventListener('click',()=>{
+                if(textInputFiled.value.length == '')
+                    return;
+                    const todoItemcontainer = document.createElement('div');
+                    todoItemcontainer.classList.add('todo-item-container');
+                    
+                    todosContainer.appendChild(todoItemcontainer);
+
+                    const todoText=document.createElement('p');
+                    todoText.id='todo-text';
+                    todoText.innerHTML = textInputFiled.value;
+                    todoItemcontainer.appendChild(todoText);
+					
+					todoText.addEventListener('dbclick',() => {
+						todoText.classList.add("line-through");
+						editbutton.setAttribute("disabled","disabled")
+					});
+
+                    const editbutton=document.createElement('button');
+                    editbutton.id='edit-button';
+					editbutton.innerHTML='Edit';
+                    todoItemcontainer.appendChild(editbutton);
+					
+					editbutton.addEventListener('click',() => {
+						textInputFiled.value=todoText.innerText;
+						const parent=editbutton.parentElement;
+						parent.parentElement.removeChild(parent);
+					});
+					
+
+                    const deletebutton=document.createElement('button');
+                    deletebutton.id='delete-button';
+					deletebutton.innerHTML='Delete';
+                    todoItemcontainer.appendChild(deletebutton)
+						
+					deletebutton.addEventListener('click',() =>{
+					const parent= deletebutton.parentElement;
+						parent.parentElement.removeChild(parent);
+					});
+					
+
+                    textInputFiled.value=" ";
+        
+            });
+
+
+        </script>
+    </body>
+</html>
